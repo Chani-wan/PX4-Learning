@@ -1,3 +1,0 @@
-menuconfig EXAMPLES_TASK3
-	bool "task3"
-    default n
