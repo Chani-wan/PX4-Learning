@@ -1,0 +1,3 @@
+menuconfig EXAMPLES_UORB_PERSON_MULTI
+	bool "UORB_MULTI"
+    default n

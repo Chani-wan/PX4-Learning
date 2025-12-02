@@ -1,0 +1,3 @@
+menuconfig EXAMPLES_OPTICAL_FLOW
+	bool "OPTICAL_FLOW"
+    default n
