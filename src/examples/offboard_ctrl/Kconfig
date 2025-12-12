@@ -1,0 +1,3 @@
+menuconfig EXAMPLES_OFFBOARD_CTRL
+	bool "OFFBOARD_CTRL"
+    default n
