@@ -2,7 +2,8 @@
 #include <math.h>
 #include <px4_platform_common/defines.h>
 
-OffboardCtrl::OffboardCtrl() :ScheduledWorkItem(MODULE_NAME, px4::wq_configurations::hp_default)
+OffboardCtrl::OffboardCtrl() :
+	ScheduledWorkItem(MODULE_NAME, px4::wq_configurations::hp_default)
 {
 
 }
@@ -15,7 +16,7 @@ OffboardCtrl::~OffboardCtrl()
 bool OffboardCtrl::init()
 {
 	// execute Run() on every sensor_accel publication
-	if (!_vehicle_local_position_sub.registerCallback())
+	if (!_vehicle_status_sub.registerCallback())
 	{
 		PX4_ERR("callback registration failed");
 		return false;
@@ -23,33 +24,30 @@ bool OffboardCtrl::init()
 
 	// alternatively, Run on fixed interval
 	///ScheduleOnInterval(5000_us); // 2000 us interval, 200 Hz rate
-
+	//ScheduleOnInterval(20000);
 	return true;
 }
+
 void OffboardCtrl::PublishOffboardMode()
 {
 	offboard_control_mode_s offboard_ctrl_mode;
 	memset(&offboard_ctrl_mode, 0, sizeof(offboard_control_mode_s));
 
 	offboard_ctrl_mode.timestamp = hrt_absolute_time();
-	offboard_ctrl_mode.position = true;
-	offboard_ctrl_mode.velocity = true;
-	offboard_ctrl_mode.acceleration = false;
+	offboard_ctrl_mode.position = false;
+	offboard_ctrl_mode.velocity = false;
+	offboard_ctrl_mode.acceleration = true;
 	_offboard_ctrl_pub.publish(offboard_ctrl_mode);
 }
 
 // bool OffboardCtrl::IsOffboardMode()
 // {
-
-// 	if(_input_rc.values[5] > 1600)
+// 	if (_vehicle_status_sub.updated())
 // 	{
-// 		_flag = 1;
-// 	}
-// 	else
-// 	{
-// 		_flag = 0;
+// 		_vehicle_status_sub.copy(&_vehicle_status);
 // 	}
 
+// 	return (_vehicle_status.nav_state == vehicle_status_s::NAVIGATION_STATE_OFFBOARD);
 // }
 void OffboardCtrl::SwitchMode()
 {
@@ -59,40 +57,42 @@ void OffboardCtrl::SwitchMode()
 	action_request.source = action_request_s::SOURCE_RC_SWITCH;
 	action_request.timestamp = hrt_absolute_time();
 
-	if(_flag && _input_rc.values[5] < 1600)
-	{
-		action_request.mode = vehicle_status_s::NAVIGATION_STATE_POSCTL;
-		_action_request_pub.publish(action_request);
-		_flag = 0;
-	}
-	if(!_flag && _input_rc.values[5] > 1600)
-	{
-		action_request.mode = vehicle_status_s::NAVIGATION_STATE_OFFBOARD;
-		PublishOffboardMode();
-		_action_request_pub.publish(action_request);
-		_switched_pos = _vehicle_local_position;
-		_switched_time = hrt_absolute_time();
-		_flag = 1;
-	}
 
-	// action_request.mode = vehicle_status_s::NAVIGATION_STATE_OFFBOARD;
-	// PublishOffboardMode();
-	// _action_request_pub.publish(action_request);
-	// if(_count == 1)
+	// if(_flag && _input_rc.values[5] < 1600 )
 	// {
-	// 	_count ++;
+	// 	action_request.mode = vehicle_status_s::NAVIGATION_STATE_POSCTL;
+	// 	_action_request_pub.publish(action_request);
+	// 	_flag = 0;
+	// }
+	// if(!_flag && _input_rc.values[5] > 1600)
+	// {
+	// 	action_request.mode = vehicle_status_s::NAVIGATION_STATE_OFFBOARD;
+	// 	PublishOffboardMode();
+	// 	_action_request_pub.publish(action_request);
 	// 	_switched_pos = _vehicle_local_position;
 	// 	_switched_time = hrt_absolute_time();
-
+	// 	_flag = 1;
 	// }
+
+	action_request.mode = vehicle_status_s::NAVIGATION_STATE_OFFBOARD;
+	PublishOffboardMode();
+	_action_request_pub.publish(action_request);
+	if(_count == 1)
+	{
+		_count ++;
+		_switched_pos = _vehicle_local_position;
+		_switched_time = hrt_absolute_time();
+
+	}
 
 
 }
 
 
+
 void OffboardCtrl::PublishTrajectorySetpoint()
 {
-    if(_flag)
+    if(!_flag)
     {
         trajectory_setpoint_s trajectory_setpoint;
         memset(&trajectory_setpoint, 0, sizeof(trajectory_setpoint_s));
@@ -102,16 +102,15 @@ void OffboardCtrl::PublishTrajectorySetpoint()
         const float dt = (_current_time - _switched_time) * 1e-6;
 
 
-        trajectory_setpoint.position[0] =  _switched_pos.x + 1.0f * sinf(dt);
-        trajectory_setpoint.position[1] =  _switched_pos.y + 0.5f - 1.0f * cosf(dt);
+        trajectory_setpoint.position[0] =  _switched_pos.x + 1.0f * sinf(dt*0.5f);
+        trajectory_setpoint.position[1] =  _switched_pos.y + 1.0f - 1.0f * cosf(dt*0.5f);
         trajectory_setpoint.position[2] =  _switched_pos.z;
-	//trajectory_setpoint.velocity[0] = 0.5f;
-	// trajectory_setpoint.yaw = 1.57f;
 
         _trajectory_setpoint_pub.publish(trajectory_setpoint);
 	PublishOffboardMode();
     }
 }
+
 
 void OffboardCtrl::Run()
 {
