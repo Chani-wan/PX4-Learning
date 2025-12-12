@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u008a rpm_estimate;\u008a rpm_raw;",
+		"fields_total_length": 52,
+		"orb_ids": [210],
+		"main_orb_id": 210,
+		"dependencies": [],
+		"name": "px4/Rpm"
+}

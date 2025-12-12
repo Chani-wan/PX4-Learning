@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u0086 request_on_off;\u0086[7] _padding0;",
+		"fields_total_length": 63,
+		"orb_ids": [42],
+		"main_orb_id": 42,
+		"dependencies": [],
+		"name": "px4/DistanceSensorModeChangeRequest"
+}

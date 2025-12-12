@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u008a measured_speed_body_x;\u008a speed_body_x_setpoint;\u008a adjusted_speed_body_x_setpoint;\u008a measured_speed_body_y;\u008a speed_body_y_setpoint;\u008a adjusted_speed_body_y_setpoint;\u008a pid_throttle_body_x_integral;\u008a pid_throttle_body_y_integral;",
+		"fields_total_length": 275,
+		"orb_ids": [209],
+		"main_orb_id": 209,
+		"dependencies": [],
+		"name": "px4/RoverVelocityStatus"
+}

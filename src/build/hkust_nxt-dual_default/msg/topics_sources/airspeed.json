@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u0089 timestamp_sample;\u008a indicated_airspeed_m_s;\u008a true_airspeed_m_s;\u008a confidence;\u0086[4] _padding0;",
+		"fields_total_length": 136,
+		"orb_ids": [13],
+		"main_orb_id": 13,
+		"dependencies": [],
+		"name": "px4/Airspeed"
+}

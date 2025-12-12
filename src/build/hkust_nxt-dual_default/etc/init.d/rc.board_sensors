@@ -1,0 +1,6 @@
+board_adc start
+bmi088 -s -b 1 -A -R 2 start
+bmi088 -s -b 1 -G -R 2 start
+bmi088 -s -b 4 -A -R 2 start
+bmi088 -s -b 4 -G -R 2 start
+spl06 -X -a 0x77 start

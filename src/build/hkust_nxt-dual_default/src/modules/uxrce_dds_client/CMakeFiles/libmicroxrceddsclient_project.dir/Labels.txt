@@ -1,0 +1,13 @@
+# Target labels
+ libmicroxrceddsclient_project
+# Source files and their labels
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/CMakeFiles/libmicroxrceddsclient_project
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/CMakeFiles/libmicroxrceddsclient_project.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/CMakeFiles/libmicroxrceddsclient_project-complete.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-install.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-mkdir.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-download.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-update.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-patch.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-configure.rule
+/home/chaniwan/PX4-Autopilot/build/hkust_nxt-dual_default/src/modules/uxrce_dds_client/src/libmicroxrceddsclient_project-stamp/libmicroxrceddsclient_project-build.rule

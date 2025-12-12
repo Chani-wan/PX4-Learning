@@ -1,0 +1,5 @@
+set VEHICLE_TYPE fw
+param set-default MAV_TYPE 8
+param set-default LPE_EN 1
+param set-default ATT_EN 1
+param set-default EKF2_EN 0

@@ -1,0 +1,10 @@
+
+
+{
+		"fields": "\u0089 timestamp;\u0089 dt;\u008a[3] pos_err;\u008a[3] vel_err;\u008a[3] vel_err_int;\u0086[4] _padding0;",
+		"fields_total_length": 107,
+		"orb_ids": [246],
+		"main_orb_id": 246,
+		"dependencies": [],
+		"name": "px4/Trif_Status"
+}
