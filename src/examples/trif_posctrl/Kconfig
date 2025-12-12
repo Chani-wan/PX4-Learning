@@ -1,3 +1,0 @@
-menuconfig EXAMPLES_TRIF_POSCTRL
-	bool "TRIF_POSCTRL"
-    default n

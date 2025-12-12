@@ -1,3 +1,0 @@
-menuconfig EXAMPLES_HELLO_CHAN
-	bool "Created by Chan"
-    default n

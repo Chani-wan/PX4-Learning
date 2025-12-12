@@ -1,3 +1,0 @@
-menuconfig EXAMPLES_SCHED_WORKITEM
-	bool "Scheduled"
-    default n

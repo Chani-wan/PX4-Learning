@@ -1,3 +1,0 @@
-menuconfig EXAMPLES_PERSON_EXAMPLE
-	bool "UORB"
-    default n
